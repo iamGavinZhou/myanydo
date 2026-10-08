@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 512 512">
+  <defs>
+    <clipPath id="sq">
+      <path d="M256 32c30 0 55.5 2 77 6 22 4 41 12 57 25 16 13 28 29 37 49 9 20 15 44 18.5 71C449 210 450.5 242 450.5 256s-1.5 46-5 73c-3.5 27-9.5 51-18.5 71-9 20-21 36-37 49-16 13-35 21-57 25-21.5 4-47 6-77 6s-55.5-2-77-6c-22-4-41-12-57-25-16-13-28-29-37-49-9-20-15-44-18.5-71-3.5-27-5-59-5-73s1.5-46 5-73c3.5-27 9.5-51 18.5-71 9-20 21-36 37-49 16-13 35-21 57-25 21.5-4 47-6 77-6Z"/>
+    </clipPath>
+    <linearGradient id="ver" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#F0663F"/>
+      <stop offset="1" stop-color="#D94620"/>
+    </linearGradient>
+  </defs>
+
+  <!-- pure white base with a hairline edge (Chrome-style clean plate) -->
+  <g clip-path="url(#sq)">
+    <rect width="512" height="512" fill="#FFFFFF"/>
+    <rect x="1" y="1" width="510" height="510" rx="220" fill="none" stroke="#E8E8E8" stroke-width="2"/>
+  </g>
+
+  <!-- single bold symbol: vermilion disc with white check -->
+  <circle cx="256" cy="256" r="128" fill="url(#ver)"/>
+  <path d="M196 260l44 44 84-92" fill="none" stroke="#FFFFFF" stroke-width="28" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
