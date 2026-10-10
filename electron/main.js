@@ -42,7 +42,7 @@ function sendReloaded() {
 }
 
 function registerIpc() {
-  ipcMain.handle('app:bootstrap', () => store.bootstrap());
+  ipcMain.handle('app:bootstrap', () => ({ ...store.bootstrap(), version: app.getVersion() }));
 
   ipcMain.handle('tasks:create', (_e, task) => store.createTask(task));
   ipcMain.handle('tasks:update', (_e, id, patch) => store.updateTask(id, patch));

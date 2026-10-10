@@ -17,7 +17,7 @@ export function AppProvider({ children }) {
     setTasks(b.tasks || []);
     setCollections(b.collections || []);
     setTags(b.tags || { sets: [], tags: [] });
-    setSettings(b.settings || {});
+    setSettings({ ...(b.settings || {}), version: b.version });
     setReady(true);
   }, []);
 

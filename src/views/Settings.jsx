@@ -85,6 +85,8 @@ export default function Settings() {
           Files: <code>tasks.json</code>, <code>collections.json</code>, <code>tags.json</code>, <code>settings.json</code>
         </p>
       </section>
+
+      <p className="settings-version">MyAnydo v{settings.version || '1.1.0'}</p>
     </div>
   );
 }

@@ -20,7 +20,15 @@ const PATHS = {
   folder: <g><path d="M3.5 6.8A1.3 1.3 0 0 1 4.8 5.5h4.4l2 2.3h8a1.3 1.3 0 0 1 1.3 1.3v8.6a1.3 1.3 0 0 1-1.3 1.3H4.8a1.3 1.3 0 0 1-1.3-1.3Z" /></g>,
   user: <g><circle cx="12" cy="8.5" r="3.8" /><path d="M4.8 20c.9-3.7 3.8-5.7 7.2-5.7s6.3 2 7.2 5.7" /></g>,
   sun2: <g><circle cx="12" cy="12" r="5" /><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2" /></g>,
-  moon: <g><path d="M20 13.5A8 8 0 0 1 10.5 4a8 8 0 1 0 9.5 9.5Z" /></g>
+  moon: <g><path d="M20 13.5A8 8 0 0 1 10.5 4a8 8 0 1 0 9.5 9.5Z" /></g>,
+  grip: <g>
+    <circle cx="9" cy="6" r="1.4" fill="currentColor" stroke="none" />
+    <circle cx="15" cy="6" r="1.4" fill="currentColor" stroke="none" />
+    <circle cx="9" cy="12" r="1.4" fill="currentColor" stroke="none" />
+    <circle cx="15" cy="12" r="1.4" fill="currentColor" stroke="none" />
+    <circle cx="9" cy="18" r="1.4" fill="currentColor" stroke="none" />
+    <circle cx="15" cy="18" r="1.4" fill="currentColor" stroke="none" />
+  </g>
 };
 
 export default function Icon({ name, size = 18, className = '' }) {

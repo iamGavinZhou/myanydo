@@ -6,6 +6,10 @@ A local-first todo app for macOS — no account, no cloud, all data stays on you
 
 ## Version history
 
+### v1.1.0 — 2026-10-10
+
+- **Subtask drag & drop reordering** — each subtask row has a grip handle (visible on hover); drag it onto another subtask to reorder. Order persists via the editor's autosave. Inputs stay fully editable — only the grip is draggable.
+
 ### v1.0.0 — 2026-10-08
 
 First official release. Everything below landed within this initial iteration cycle:

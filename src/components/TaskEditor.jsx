@@ -25,6 +25,8 @@ export default function TaskEditor({ editor, onClose }) {
   const [showTags, setShowTags] = useState(false);
   const [preview, setPreview] = useState(false);
   const [subInput, setSubInput] = useState('');
+  const [subDragId, setSubDragId] = useState(null);
+  const [subOverId, setSubOverId] = useState(null);
   const first = useRef(true);
 
   // Esc closes
@@ -60,6 +62,24 @@ export default function TaskEditor({ editor, onClose }) {
     if (!t) return;
     set({ subtasks: [...draft.subtasks, { id: crypto.randomUUID(), title: t, done: false }] });
     setSubInput('');
+  };
+
+  /* ---- subtask drag & drop reorder ---- */
+  const resetSubDrag = () => { setSubDragId(null); setSubOverId(null); };
+
+  const dropSubtask = () => {
+    if (subDragId && subOverId && subDragId !== subOverId) {
+      setDraft(d => {
+        const from = d.subtasks.findIndex(s => s.id === subDragId);
+        const to = d.subtasks.findIndex(s => s.id === subOverId);
+        if (from === -1 || to === -1) return d;
+        const next = [...d.subtasks];
+        const [moved] = next.splice(from, 1);
+        next.splice(to, 0, moved);
+        return { ...d, subtasks: next };
+      });
+    }
+    resetSubDrag();
   };
 
   const saveNew = async () => {
@@ -178,7 +198,26 @@ export default function TaskEditor({ editor, onClose }) {
           <span className="drawer__label"><Icon name="sub" size={14} />Subtasks</span>
           <div className="drawer__subs">
             {draft.subtasks.map((s, i) => (
-              <div key={s.id} className="subtask">
+              <div
+                key={s.id}
+                className="subtask"
+                onDragOver={(e) => { e.preventDefault(); setSubOverId(s.id); }}
+                onDrop={dropSubtask}
+                data-dragging={subDragId === s.id ? '' : undefined}
+                data-dragover={subOverId === s.id && subDragId !== s.id ? '' : undefined}
+              >
+                <span
+                  className="subtask__grip"
+                  draggable
+                  onDragStart={(e) => {
+                    setSubDragId(s.id);
+                    if (e.dataTransfer) e.dataTransfer.effectAllowed = 'move';
+                  }}
+                  onDragEnd={resetSubDrag}
+                  title="Drag to reorder"
+                >
+                  <Icon name="grip" size={13} />
+                </span>
                 <button
                   className={`subtask__check${s.done ? ' is-checked' : ''}`}
                   onClick={() => set({
