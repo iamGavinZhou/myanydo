@@ -28,6 +28,7 @@
   "build": {
     "appId": "com.myanydo.desktop",
     "productName": "MyAnydo",
+    "afterPack": "scripts/adhoc-sign.cjs",
     "directories": {
       "output": "release",
       "buildResources": "build"
