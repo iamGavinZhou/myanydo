@@ -100,19 +100,28 @@ export default function TaskEditor({ editor, onClose }) {
       <div className="drawer-backdrop" onClick={onClose} />
       <aside className="drawer" role="dialog" aria-label="Task editor">
         <header className="drawer__head">
+          {/* whole pill (circle + label) toggles status — large hit area */}
           <button
-            className={`task__check drawer__check${draft.status === 'done' ? ' is-checked' : ''}`}
+            className={`drawer__status${draft.status === 'done' ? ' is-done' : ''}`}
             onClick={() => set({ status: draft.status === 'done' ? 'todo' : 'done' })}
-            aria-label="Toggle done"
+            aria-label={draft.status === 'done' ? 'Mark as open' : 'Mark as done'}
           >
-            {draft.status === 'done' && <Icon name="check" size={12} />}
+            <span className={`task__check drawer__check${draft.status === 'done' ? ' is-checked' : ''}`}>
+              {draft.status === 'done' && <Icon name="check" size={12} />}
+            </span>
+            <span className="drawer__statustext">
+              {draft.status === 'done' ? 'Done' : 'Mark done'}
+            </span>
           </button>
-          <span className="drawer__statustext">
-            {draft.status === 'done' ? 'Done' : 'Open'}
-          </span>
           <div className="drawer__actions">
-            {!isNew && <button className="btn btn--ghost btn--sm" onClick={removeTask}><Icon name="trash" size={15} /></button>}
-            <button className="btn btn--ghost btn--sm" onClick={onClose}><Icon name="x" size={16} /></button>
+            {!isNew && (
+              <button className="drawer__iconbtn drawer__iconbtn--danger" onClick={removeTask} aria-label="Delete task" title="Delete">
+                <Icon name="trash" size={17} />
+              </button>
+            )}
+            <button className="drawer__iconbtn" onClick={onClose} aria-label="Close" title="Close (Esc)">
+              <Icon name="x" size={18} />
+            </button>
           </div>
         </header>
 

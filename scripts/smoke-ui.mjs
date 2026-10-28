@@ -91,7 +91,7 @@ const persisted = await evaluate(`window.api.bootstrap().then(b => b.tasks.find(
 check('subtasks persisted (autosave)', persisted === 2, `count=${persisted}`);
 
 // close drawer + cleanup
-await evaluate(`[...document.querySelectorAll('.drawer__head .btn--ghost')].pop()?.click()`);
+await evaluate(`[...document.querySelectorAll('.drawer__head .drawer__iconbtn')].pop()?.click()`);
 await sleep(400);
 await evaluate(`window.api.deleteTask(${JSON.stringify(taskId)}).then(() => true)`);
 

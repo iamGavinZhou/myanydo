@@ -566,12 +566,62 @@ input:focus, select:focus, textarea:focus, button:focus-visible {
   padding: 18px 22px 20px;
   overflow-y: auto;
   animation: slideIn 0.28s cubic-bezier(0.2, 0.8, 0.25, 1) both;
+  /* ROOT-CAUSE FIX: the window drag strip (.titlestrip) is resolved at the
+     window level and ignores z-index, so it swallowed clicks on the top 38px
+     of this drawer. Declaring no-drag carves the drawer out of it. */
+  -webkit-app-region: no-drag;
 }
 @keyframes slideIn { from { transform: translateX(60px); opacity: 0.4; } }
 
-.drawer__head { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+/* every overlay must punch through the window drag strip too */
+.drawer-backdrop,
+.tagpicker,
+.tagpicker-backdrop,
+.groupby__menu,
+.calpicker__menu {
+  -webkit-app-region: no-drag;
+}
+
+.drawer__head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 -8px 14px;
+  min-height: 44px;
+}
+
+/* status toggle: circle + label form ONE large button */
+.drawer__status {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 40px;
+  padding: 6px 14px 6px 8px;
+  border-radius: 99px;
+  transition: background 0.14s;
+}
+.drawer__status:hover { background: var(--paper-deep); }
+.drawer__status:hover .drawer__check { border-color: var(--accent); background: var(--accent-soft); }
+.drawer__status.is-done:hover .drawer__check { background: var(--accent-deep); }
+.drawer__status .drawer__check { pointer-events: none; margin-top: 0; }
 .drawer__statustext { font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-3); }
+.drawer__status:hover .drawer__statustext { color: var(--ink); }
+.drawer__status.is-done .drawer__statustext { color: var(--accent-deep); }
+
 .drawer__actions { margin-left: auto; display: flex; gap: 4px; }
+
+/* delete / close: 40x40 hit targets (Apple HIG minimum ~44pt) */
+.drawer__iconbtn {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  color: var(--ink-2);
+  transition: background 0.14s, color 0.14s;
+}
+.drawer__iconbtn:hover { background: var(--paper-deep); color: var(--ink); }
+.drawer__iconbtn--danger:hover { background: var(--accent-soft); color: var(--accent-deep); }
 
 .drawer__title {
   font-family: var(--font-display);

@@ -6,6 +6,12 @@ A local-first todo app for macOS — no account, no cloud, all data stays on you
 
 ## Version history
 
+### v1.1.1 — 2026-10-28
+
+- **Fix: task detail header buttons were hard to click.** Root cause: the full-width window drag strip (`-webkit-app-region: drag`, top 38px) is resolved by the OS at window level and ignores z-index, so it swallowed clicks on the drawer's top edge — only the lower sliver of each button responded. The drawer and all popovers now declare `no-drag`.
+- **Larger hit targets** — the status toggle is now one pill button (circle + "Mark done" label, 40px tall); Delete and Close are 40×40 icon buttons with hover feedback.
+- Settings page shows the running app version at the bottom (since v1.1.0, read from `app.getVersion()`).
+
 ### v1.1.0 — 2026-10-10
 
 - **Subtask drag & drop reordering** — each subtask row has a grip handle (visible on hover); drag it onto another subtask to reorder. Order persists via the editor's autosave. Inputs stay fully editable — only the grip is draggable.
